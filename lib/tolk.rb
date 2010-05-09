@@ -1,4 +1,5 @@
 require 'ya2yaml'
+require 'will_paginate'
 
 module Tolk
 end
