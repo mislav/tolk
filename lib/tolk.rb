@@ -17,6 +17,10 @@ end
 # enable autoloading
 ActiveSupport::Dependencies.load_paths.concat engine.load_paths
 
+Rails.configuration.middleware.use 'Rack::Static',
+  :urls => ['/tolk/reset.css', '/tolk/screen.css'],
+  :root => File.join(engine.directory, 'public')
+
 # ultrahax
 if 'script/generate' == $0 and defined?(Bundler)
   require 'rails_generator'
