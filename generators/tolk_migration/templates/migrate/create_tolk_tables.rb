@@ -9,10 +9,12 @@ class CreateTolkTables < ActiveRecord::Migration
     add_index :tolk_locales, :name, :unique => true
 
     create_table :tolk_phrases do |t|
-      t.text     :key
+      t.string   :key
       t.datetime :created_at
       t.datetime :updated_at
     end
+
+    add_index :tolk_phrases, :key, :unique => true
 
     create_table :tolk_translations do |t|
       t.integer  :phrase_id
