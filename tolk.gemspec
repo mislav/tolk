@@ -1,7 +1,7 @@
 Gem::Specification.new do |gem|
   gem.name    = 'tolk'
   gem.version = '0.0.1'
-  gem.date    = Date.today.to_s
+  gem.date    = Time.now.strftime('%Y-%m-%d')
 
   gem.add_dependency 'ya2yaml', '~> 0.29.2'
   gem.add_dependency 'will_paginate', '~> 2.3.12'
