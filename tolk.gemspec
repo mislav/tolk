@@ -4,7 +4,7 @@ Gem::Specification.new do |gem|
   gem.date    = Time.now.strftime('%Y-%m-%d')
 
   gem.add_dependency 'ya2yaml', '~> 0.29.2'
-  gem.add_dependency 'will_paginate', '~> 2.3.12'
+  gem.add_dependency 'will_paginate', '~> 2.3.13'
   # gem.add_development_dependency 'rspec', '~> 1.2.9'
 
   gem.summary = "Tolk, the Rails translation engine"
