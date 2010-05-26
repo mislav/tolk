@@ -25,7 +25,7 @@ module Tolk
       'id'    => 'Indonesian',
       'is'    => 'Icelandic',
       'it'    => 'Italian',
-      'jp'    => 'Japanese',
+      'ja'    => 'Japanese',
       'ko'    => 'Korean',
       'lo'    => 'Lao',
       'lt'    => 'Lithuanian',
