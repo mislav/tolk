@@ -32,6 +32,7 @@ class CreateTolkTables < ActiveRecord::Migration
   def self.down
     remove_index :tolk_translations, :column => [:phrase_id, :locale_id]
     remove_index :tolk_locales, :column => :name
+    remove_index :tolk_phrases, :column => :key
 
     drop_table :tolk_translations
     drop_table :tolk_phrases
