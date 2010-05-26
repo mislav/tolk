@@ -6,18 +6,12 @@ module Tolk
 
     module ClassMethods
       def sync!
-        sync_phrases(load_translations)
+        sync_phrases filter_out_i18n_keys(load_translations)
       end
 
-      def load_translations
+      def load_translations(name = primary_locale.name.to_sym)
         I18n.available_locales # force load
-        translations = flat_hash(I18n.backend.send(:translations)[primary_locale.name.to_sym])
-        filter_out_i18n_keys(translations.merge(read_primary_locale_file))
-      end
-
-      def read_primary_locale_file
-        primary_file = "#{self.locales_config_path}/#{self.primary_locale_name}.yml"
-        File.exists?(primary_file) ? flat_hash(YAML::load(IO.read(primary_file))[self.primary_locale_name]) : {}
+        flat_hash(I18n.backend.send(:translations)[name])
       end
 
       def flat_hash(data, prefix = '', result = {})
