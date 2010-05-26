@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name    = 'tolk'
-  gem.version = '0.0.1'
+  gem.version = '0.2.0'
   gem.date    = Time.now.strftime('%Y-%m-%d')
 
   gem.add_dependency 'ya2yaml', '~> 0.29.2'
