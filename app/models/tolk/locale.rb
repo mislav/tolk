@@ -51,7 +51,7 @@ module Tolk
     }
 
     has_many :phrases, :through => :translations, :class_name => 'Tolk::Phrase'
-    has_many :translations, :class_name => 'Tolk::Translation', :dependent => :destroy
+    has_many :translations, :class_name => 'Tolk::Translation', :dependent => :delete_all
     accepts_nested_attributes_for :translations, :reject_if => proc { |attributes| attributes['text'].blank? }
     before_validation_on_update :remove_invalid_translations_from_target
 
