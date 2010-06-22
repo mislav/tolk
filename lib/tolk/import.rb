@@ -20,15 +20,17 @@ module Tolk
           phrase = phrases.detect {|p| p.key == key}
 
           if phrase
-            translation = locale.translations.new(:text => value, :phrase => phrase)
-            count += 1 if translation.save
+            translation = phrase.translations.detect {|t| t.locale_id == locale.id }
+            translation ||= locale.translations.new(:phrase => phrase)
+            translation.text = value
+            count += 1 if (translation.new_record? or translation.changed?) and translation.save
           else
-            puts "[ERROR] Key '%s' was found in %s locale but the %s translation is missing" %
+            puts %([ERROR] Key '%s' was found in "%s" locale but the %s translation is missing) %
               [key, locale_name, Tolk::Locale.primary_language_name]
           end
         end
 
-        puts "[INFO] Imported #{count} keys from #{locale_name} locale"
+        puts %([INFO] Imported #{count} keys from "#{locale_name}" locale)
       end
     end
   end
