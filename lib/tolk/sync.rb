@@ -53,8 +53,7 @@ module Tolk
             # Set the primary updated flag if the primary translation has changed and it is not a new record.
             secondary_locales.each do |locale|
               if existing_translation = existing_phrase.translations.detect {|t| t.locale_id == locale.id }
-                existing_translation.force_set_primary_update = true
-                existing_translation.save!
+                existing_translation.mark_primary_updated!
               end
             end
           end

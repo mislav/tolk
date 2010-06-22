@@ -16,7 +16,12 @@ module Tolk
     belongs_to :locale, :class_name => 'Tolk::Locale'
 
     attr_accessor :force_set_primary_update
-    before_save :set_primary_updated
+    before_save :reset_primary_updated, :unless => :force_set_primary_update
+
+    def mark_primary_updated!
+      self.force_set_primary_update = true
+      self.update_attribute(:primary_updated, true)
+    end
 
     before_save :set_previous_text
 
@@ -97,8 +102,8 @@ module Tolk
       true
     end
 
-    def set_primary_updated
-      self.primary_updated = self.force_set_primary_update ? true : false
+    def reset_primary_updated
+      self.primary_updated = false
       true
     end
 
