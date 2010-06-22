@@ -23,11 +23,12 @@ module Tolk
             translation = locale.translations.new(:text => value, :phrase => phrase)
             count += 1 if translation.save
           else
-            puts "[ERROR] Key '#{key}' was found in #{locale_name}.yml but #{Tolk::Locale.primary_language_name} translation is missing"
+            puts "[ERROR] Key '%s' was found in %s locale but the %s translation is missing" %
+              [key, locale_name, Tolk::Locale.primary_language_name]
           end
         end
 
-        puts "[INFO] Imported #{count} keys from #{locale_name}.yml"
+        puts "[INFO] Imported #{count} keys from #{locale_name} locale"
       end
     end
   end
