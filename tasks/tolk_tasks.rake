@@ -10,9 +10,17 @@ namespace :tolk do
   end
 
   desc "Imports data all non default locale yml files to Tolk"
-  task :import => :environment do
-    Rake::Task['tolk:sync'].invoke
+  task :import => [:'tolk:sync', :'tolk:import_secondary']
+
+  task :import_secondary => :environment do
     Tolk::Locale.import_secondary_locales
+  end
+  
+  task :delete_secondary => :environment do
+    Tolk::Locale.secondary_locales.each do |locale|
+      locale.destroy
+      puts %(deleted locale "#{locale.name}")
+    end
   end
 
   desc "Show all the keys potentially containing HTML values and no _html postfix"
