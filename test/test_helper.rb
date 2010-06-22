@@ -1,8 +1,7 @@
-ENV["RAILS_ENV"] = "test"
-require File.expand_path(File.dirname(__FILE__) + "/../config/environment")
+ENV["RAILS_ENV"] ||= "test"
+require File.expand_path('../../config/environment', __FILE__)
 require 'test_help'
-
-require "webrat"
+require 'mocha'
 
 Webrat.configure do |config|
   config.mode = :rails
@@ -18,5 +17,9 @@ class ActiveSupport::TestCase
 
   fixtures :all
 
-  self.fixture_class_names = {:tolk_locales => 'Tolk::Locale', :tolk_phrases => 'Tolk::Phrase', :tolk_translations => 'Tolk::Translation'}
+  self.fixture_class_names = {
+    :tolk_locales => 'Tolk::Locale',
+    :tolk_phrases => 'Tolk::Phrase',
+    :tolk_translations => 'Tolk::Translation'
+  }
 end
