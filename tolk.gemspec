@@ -1,6 +1,6 @@
 Gem::Specification.new do |gem|
   gem.name    = 'tolk'
-  gem.version = '0.2.0'
+  gem.version = '0.2.1'
   gem.date    = Time.now.strftime('%Y-%m-%d')
 
   gem.add_dependency 'ya2yaml', '~> 0.29.2'
@@ -19,5 +19,6 @@ Gem::Specification.new do |gem|
   gem.rdoc_options = ['--main', 'README', '--charset=UTF-8']
   gem.extra_rdoc_files = ['README', 'MIT-LICENSE']
 
-  gem.files = Dir['Rakefile', '{app,config,db,generators,lib,test}/**/*', 'README*', 'MIT-LICENSE*'] & `git ls-files -z`.split("\0")
+  gem.files = Dir['Rakefile', '{app,generators,lib,test}/**/*', 'README*', 'MIT-LICENSE*']
+  gem.files &= `git ls-files -z`.split("\0") if `type -t git` && $?.success?
 end
