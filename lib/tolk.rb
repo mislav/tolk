@@ -17,6 +17,9 @@ end
 # enable autoloading
 ActiveSupport::Dependencies.load_paths.concat engine.load_paths
 
+# enable preloading of application classes in production
+Rails.configuration.eager_load_paths.concat engine.send(:app_paths)
+
 Rails.configuration.middleware.use 'Rack::Static',
   :urls => ['/tolk/reset.css', '/tolk/screen.css'],
   :root => File.join(engine.directory, 'public')
