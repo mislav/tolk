@@ -1,3 +1,6 @@
+require_dependency 'tolk/sync'
+require_dependency 'tolk/import'
+
 module Tolk
   class Locale < ActiveRecord::Base
     set_table_name "tolk_locales"
