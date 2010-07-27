@@ -5,54 +5,6 @@ module Tolk
   class Locale < ActiveRecord::Base
     set_table_name "tolk_locales"
 
-    MAPPING = {
-      'ar'    => 'Arabic',
-      'bs'    => 'Bosnian',
-      'bt'    => 'Bulgarian',
-      'ca'    => 'Catalan',
-      'cz'    => 'Czech',
-      'da'    => 'Danish',
-      'de'    => 'German',
-      'dsb'   => 'Lower Sorbian',
-      'el'    => 'Greek',
-      'en'    => 'English',
-      'es'    => 'Spanish',
-      'et'    => 'Estonian',
-      'fa'    => 'Persian',
-      'fi'    => 'Finnish',
-      'fr'    => 'French',
-      'he'    => 'Hebrew',
-      'hr'    => 'Croatian',
-      'hsb'   => 'Upper Sorbian',
-      'hu'    => 'Hungarian',
-      'id'    => 'Indonesian',
-      'is'    => 'Icelandic',
-      'it'    => 'Italian',
-      'ja'    => 'Japanese',
-      'ko'    => 'Korean',
-      'lo'    => 'Lao',
-      'lt'    => 'Lithuanian',
-      'lv'    => 'Latvian',
-      'mk'    => 'Macedonian',
-      'nl'    => 'Dutch',
-      'no'    => 'Norwegian',
-      'pl'    => 'Polish',
-      'pt-BR' => 'Portuguese (Brazilian)',
-      'pt-PT' => 'Portuguese (Portugal)',
-      'ro'    => 'Romanian',
-      'ru'    => 'Russian',
-      'se'    => 'Swedish',
-      'sk'    => 'Slovak',
-      'sl'    => 'Slovenian',
-      'sr'    => 'Serbian',
-      'sw'    => 'Swahili',
-      'th'    => 'Thai',
-      'tr'    => 'Turkish',
-      'uk'    => 'Ukrainian',
-      'vi'    => 'Vietnamese',
-      'zh'    => 'Chinese'
-    }
-
     has_many :phrases, :through => :translations, :class_name => 'Tolk::Phrase'
     has_many :translations, :class_name => 'Tolk::Translation', :dependent => :delete_all
     accepts_nested_attributes_for :translations, :reject_if => proc { |attributes| attributes['text'].blank? }
@@ -193,7 +145,7 @@ module Tolk
     end
 
     def language_name
-      MAPPING[self.name] || self.name
+      I18n.translate(self.name, :scope => :locales, :default => self.name)
     end
 
     def [](key)
